@@ -1,26 +1,40 @@
 package dominio;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Libreta{
+public class Libreta implements Serializable{
+    ArrayList <Contacto> contactos = new ArrayList<>();
 
-    private String nombreContacto;
-    
-    private ArrayList <Libreta> libreta = new ArrayList<>();
-	public Libreta (String nombre){
-		this.nombreContacto = nombreContacto;
+    public ArrayList<Contacto> geContactos(){
+        return this.contactos;
+    }
+    public Libreta(){
+        this.contactos = new ArrayList<Contacto>();
     }
 
-    public Libreta addContacto (Libreta lib){
-		libreta.add(lib);
-		return this;
-		}
-	
-    public String toString (){
-		String cad = "Sus contactos son: " + nombreContacto ;
-		for (Libreta lib: libreta)
-		cad+= (lib + "\n");
-		return cad;
-       }
+    public void setContactos(ArrayList<Contacto> contactos){
+        this.contactos = contactos; 
+    }
+
+    public void addContacto(Contacto c){
+        this.contactos.add(c);
+    }
+    public String toString(){
+        String res = "La libreta tiene " + this.contactos.size() + " contactos: ";
+        for(Contacto c : contactos){
+            res = res + " " + c.toString();
+        }
+        return res;
+    }
+    public static void main(String[] args) {
+        Libreta l = new Libreta();
+        Contacto c1 = new Contacto("Pablo", "1");
+        Contacto c2 = new Contacto("Palbo", "2");
+        l.addContacto(c1);
+        l.addContacto(c2);
+        System.out.println(l.toString());
+    }
+}
         
 
 
@@ -31,4 +45,3 @@ public class Libreta{
 
 
 
-}
